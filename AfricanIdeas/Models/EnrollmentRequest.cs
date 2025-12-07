@@ -1,0 +1,8 @@
+﻿namespace AfricanIdeas.Models
+{
+    public class EnrollmentRequest
+    {
+        public int CourseId { get; set; }
+        public int StudentId { get; set; }
+    }
+}

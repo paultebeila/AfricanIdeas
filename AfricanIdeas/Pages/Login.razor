@@ -1,0 +1,27 @@
+﻿@page "/login"
+@using AfricanIdeas.Services
+@inject AuthService Auth
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<h3>Login</h3>
+
+<input @bind="username" placeholder="Username" class="form-control" />
+<input @bind="password" placeholder="Password" class="form-control" type="password" />
+
+<button @onclick="DoLogin" class="btn btn-primary mt-2">Login</button>
+
+@code {
+    string username = "";
+    string password = "";
+
+    async Task DoLogin()
+    {
+        bool success = await Auth.Login(username, password);
+
+        if (success)
+            Nav.NavigateTo("/courses");
+        else
+            await JS.InvokeVoidAsync("alert", "Invalid username/password");
+    }
+}

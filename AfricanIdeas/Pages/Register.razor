@@ -1,0 +1,28 @@
+﻿@page "/register"
+@using AfricanIdeas.Services
+@inject AuthService Auth
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+
+<h3>Register</h3>
+
+<input @bind="username" class="form-control" placeholder="Username" />
+<input @bind="password" class="form-control" placeholder="Password" type="password" />
+
+<button @onclick="DoRegister" class="btn btn-success mt-2">Register</button>
+
+@code {
+    string username = "";
+    string password = "";
+
+    async Task DoRegister()
+    {
+        var created = await Auth.Register(username, password);
+
+        if (created)
+            Nav.NavigateTo("/login");
+        else
+            await JS.InvokeVoidAsync("alert", "Username exists");
+    }
+}

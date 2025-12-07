@@ -1,0 +1,44 @@
+﻿@page "/courses"
+@using AfricanIdeas.Models
+@using AfricanIdeas.Services
+@inject CourseService Course
+@inject AuthService Auth
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<h3>All Courses</h3>
+
+@if (list == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    foreach (var c in list)
+    {
+        <div class="card p-3 mt-2">
+            <b>@c.Name</b>
+            <button class="btn btn-primary mt-2" @onclick="() => Enroll(c.Id)">Enroll</button>
+        </div>
+    }
+}
+
+@code {
+    List<CourseDto> list;
+
+    protected override async Task OnInitializedAsync()
+    {
+        list = await Course.GetAllCourses();
+    }
+
+    async Task Enroll(int courseId)
+    {
+        if (Auth.LoggedInUser == null)
+            Nav.NavigateTo("/login");
+
+        bool success = await Course.Enroll(Auth.LoggedInUser.Id, courseId);
+
+        if (success)
+            await JS.InvokeVoidAsync("alert", "Enrolled!");
+    }
+}

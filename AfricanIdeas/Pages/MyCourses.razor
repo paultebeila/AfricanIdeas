@@ -1,0 +1,49 @@
+﻿@page "/mycourses"
+@using AfricanIdeas.Models
+@using AfricanIdeas.Services
+@inject CourseService Courses
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<h3>My Courses</h3>
+
+@if (myCourses == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    foreach (var c in myCourses)
+    {
+        <div class="card p-3 mt-2">
+            <b>@c.Name</b>
+            <button class="btn btn-danger mt-2" @onclick="() => Unenroll(c.Id)">Unenroll</button>
+        </div>
+    }
+}
+
+@code {
+    List<CourseDto> myCourses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Auth.LoggedInUser == null)
+        {
+            Nav.NavigateTo("/login");
+            return;
+        }
+
+        myCourses = await Courses.GetCoursesForStudent(Auth.LoggedInUser.Id);
+    }
+
+    async Task Unenroll(int courseId)
+    {
+        bool success = await Courses.Unenroll(Auth.LoggedInUser.Id, courseId);
+
+        if (success)
+        {
+            myCourses = await Courses.GetCoursesForStudent(Auth.LoggedInUser.Id);
+            StateHasChanged();
+        }
+    }
+}
