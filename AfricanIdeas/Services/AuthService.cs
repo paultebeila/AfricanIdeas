@@ -21,7 +21,9 @@ namespace AfricanIdeas.Services
             var response = await _http.PostAsJsonAsync("api/auth/login", request);
 
             if (!response.IsSuccessStatusCode)
+            {
                 return false;
+            }
 
             LoggedInUser = await response.Content.ReadFromJsonAsync<StudentDto>();
             return true;

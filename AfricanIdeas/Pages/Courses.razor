@@ -34,11 +34,15 @@ else
     async Task Enroll(int courseId)
     {
         if (Auth.LoggedInUser == null)
+        {
             Nav.NavigateTo("/login");
+        }
 
         bool success = await Course.Enroll(Auth.LoggedInUser.Id, courseId);
 
         if (success)
+        {
             await JS.InvokeVoidAsync("alert", "Enrolled!");
+        }
     }
 }

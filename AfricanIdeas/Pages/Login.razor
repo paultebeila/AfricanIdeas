@@ -1,15 +1,30 @@
 ﻿@page "/login"
-@using AfricanIdeas.Services
+@using Services
 @inject AuthService Auth
 @inject NavigationManager Nav
 @inject IJSRuntime JS
 
-<h3>Login</h3>
 
-<input @bind="username" placeholder="Username" class="form-control" />
-<input @bind="password" placeholder="Password" class="form-control" type="password" />
-
-<button @onclick="DoLogin" class="btn btn-primary mt-2">Login</button>
+<div style="background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            width: 80%;
+            max-width: 400px;">
+    <h2 class="mb-4 text-center text-primary fw-bold">Login</h2>
+    <input style="width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;" @bind="username" sty placeholder="Username" />
+    <input @bind="password" class="form-control form-control-lg rounded-pill mb-4" placeholder="Password" type="password" />
+    <button class="btn btn-primary btn-lg w-100 rounded-pill fw-bold" @onclick="DoLogin">Log In</button>
+    <div class="mt-3 text-center">
+        <span class="text-muted">Don't have an account? </span>
+        <a class="text-primary fw-bold" @onclick="@(() => Nav.NavigateTo("/register"))">Register</a>
+    </div>
+</div>
 
 @code {
     string username = "";
@@ -20,8 +35,12 @@
         bool success = await Auth.Login(username, password);
 
         if (success)
+        {
             Nav.NavigateTo("/courses");
+        }
         else
+        {
             await JS.InvokeVoidAsync("alert", "Invalid username/password");
+        }
     }
 }

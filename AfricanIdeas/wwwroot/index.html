@@ -1,25 +1,107 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
-    <title>AfricanIdeas</title>
-    <base href="/" />
-    <link href="css/app.css" rel="stylesheet" />
-    
-    <!-- If you add any scoped CSS files, uncomment the following to load them
-    <link href="AfricanIdeas.styles.css" rel="stylesheet" /> -->
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a0dad, #1e90ff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .container {
+            /*background-color: rgba(255, 255, 255, 0.95);*/
+            /*padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;*/
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #6a0dad;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background-color: #580aab;
+            }
+
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #333;
+        }
+
+            .register-link a {
+                color: #6a0dad;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .register-link a:hover {
+                    text-decoration: underline;
+                }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+            nav a {
+                margin-right: 15px;
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+    <base href="/" />
+</head>
 <body>
+    <nav>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="/courses">Courses</a>
+        <a href="/mycourses">My Courses</a>
+    </nav>
     <div id="app">Loading...</div>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
-
 </html>
+

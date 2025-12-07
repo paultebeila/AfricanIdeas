@@ -4,13 +4,28 @@
 @inject NavigationManager Nav
 @inject IJSRuntime JS
 
+<div style="background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            width: 80%;
+            max-width: 400px;">
+    <h2 class="mb-4 text-center text-primary fw-bold">Register</h2>
 
-<h3>Register</h3>
+    <input style="width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;" @bind="username" class="form-control" placeholder="Username" />
+    <input @bind="password" class="form-control" placeholder="Password" type="password" />
 
-<input @bind="username" class="form-control" placeholder="Username" />
-<input @bind="password" class="form-control" placeholder="Password" type="password" />
-
-<button @onclick="DoRegister" class="btn btn-success mt-2">Register</button>
+    <button @onclick="DoRegister" class="btn btn-success mt-2">Register</button>
+    <div class="mt-3 text-center">
+        <span class="text-muted">Don't have an account? </span>
+        <a class="text-primary fw-bold" @onclick="@(() => Nav.NavigateTo("/login"))">Login</a>
+    </div>
+</div>
 
 @code {
     string username = "";
@@ -21,8 +36,12 @@
         var created = await Auth.Register(username, password);
 
         if (created)
+        {
             Nav.NavigateTo("/login");
+        }
         else
+        {
             await JS.InvokeVoidAsync("alert", "Username exists");
+        }
     }
 }

@@ -3,32 +3,31 @@
 @inject NavigationManager Nav
 @inject AuthService Auth
 
-<div class="d-flex">
-
-    <!-- Sidebar -->
-    <div class="sidebar bg-light p-3" style="width:200px; min-height:100vh;">
-        <h4>Menu</h4>
-        <ul class="nav flex-column">
-            <li class="nav-item mb-1">
-                <a class="nav-link" @onclick="@(() => NavigateTo("/login"))">Login</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    @* <div class="container-fluid">
+        <a class="navbar-brand" href="#">Course App</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" @onclick="@(() => Nav.NavigateTo("/login"))">Login</a>
             </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link" @onclick="@(() => NavigateTo("/register"))">Register</a>
+            <li class="nav-item">
+                <a class="nav-link" @onclick="@(() => Nav.NavigateTo("/register"))">Register</a>
             </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link" @onclick="@(() => NavigateTo("/courses"))">Courses</a>
+            <li class="nav-item">
+                <a class="nav-link" @onclick="@(() => Nav.NavigateTo("/courses"))">Courses</a>
             </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link" @onclick="@(() => NavigateTo("/mycourses"))">My Courses</a>
+            <li class="nav-item">
+                <a class="nav-link" @onclick="@(() => Nav.NavigateTo("/mycourses"))">My Courses</a>
             </li>
         </ul>
-    </div>
+    </div> *@
+</nav>
 
-    <!-- Main content -->
-    <div class="main-content flex-grow-1 p-3" style="margin-left:210px;">
+
+<div class="container d-flex justify-content-center align-items-start" style="min-height: 80vh; padding-top: 30px;">
+    <div class="w-75">
         @Body
     </div>
-
 </div>
 
 @code {
